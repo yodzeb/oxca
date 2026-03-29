@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#4f9cf7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="XC Analyzer">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>XC Flight Analyzer</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+</head>
+<body>
+<div class="app-shell">
+  <header class="app-header">
+    <div class="app-logo">
+      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 20C6 14 10 8 14 6C18 4 24 6 26 8" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M2 22C4 18 8 13 14 11" stroke="var(--thermal)" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="3 3"/>
+        <circle cx="14" cy="6" r="2.5" fill="var(--accent)"/>
+      </svg>
+      XC Analyzer
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-icon" id="btn-theme" title="Toggle light/dark">☀</button>
+      <button class="btn" id="btn-settings" title="Settings">⚙ Settings</button>
+      <button class="btn btn-primary" id="btn-load">Load IGC</button>
+      <input type="file" id="file-input" accept=".igc" hidden>
+    </div>
+  </header>
+
+  <div class="upload-screen" id="upload-screen">
+    <div class="upload-zone" id="upload-zone">
+      <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M28 8v28M16 20l12-12 12 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M8 36v8a4 4 0 004 4h32a4 4 0 004-4v-8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <h2>Drop your IGC file here</h2>
+      <p>or click to browse — .igc format</p>
+    </div>
+  </div>
+
+  <div class="analysis-view" id="analysis-view">
+    <div class="flight-info" id="flight-info"></div>
+    <nav class="tab-bar" id="tab-bar"></nav>
+    <div class="tab-panels" id="tab-panels"></div>
+  </div>
+</div>
+
+<div class="loading-overlay hidden" id="loading"><div class="spinner"></div></div>
+
+<div id="settings-modal" style="display:none; position:fixed; inset:0; z-index:300; background:rgba(12,14,19,0.88); align-items:center; justify-content:center;">
+  <div class="card" style="max-width:600px; width:90%; max-height:80vh; overflow-y:auto;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+      <h3 style="font-size:1.05rem; font-weight:600;">Parameters</h3>
+      <button class="btn btn-sm" id="settings-close">✕</button>
+    </div>
+    <div class="settings-grid" id="settings-form"></div>
+    <div style="margin-top:18px; text-align:right;">
+      <button class="btn btn-primary" id="settings-save">Save & Re-analyze</button>
+    </div>
+  </div>
+</div>
+
+<script src="core/config.js"></script>
+<script src="core/geo.js"></script>
+<script src="core/igc-parser.js"></script>
+<script src="core/flight-enricher.js"></script>
+<script src="core/flight-store.js"></script>
+<script src="core/module-registry.js"></script>
+<script src="core/chart-theme.js"></script>
+<script src="core/helpers.js"></script>
+<script src="modules/mod-overview.js"></script>
+<script src="modules/mod-vario.js"></script>
+<script src="modules/mod-wind.js"></script>
+<script src="modules/mod-phases.js"></script>
+<script src="modules/mod-record.js"></script>
+<script src="modules/mod-mccready.js"></script>
+<script src="core/app.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(() => {});
+}
+</script>
+</body>
+</html>
