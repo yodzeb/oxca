@@ -2,7 +2,7 @@
    CORE: CONFIG — Global parameters with localStorage persistence
    ═══════════════════════════════════════════════════════════════ */
 const Config = (() => {
-  const STORAGE_KEY = 'xc-analyzer-config';
+  const STORAGE_KEY = 'oxca-config';
 
   const DEFAULTS = {
     // Paraglider performance

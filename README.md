@@ -1,4 +1,8 @@
-# 🪂 XC Flight Analyzer
+# 🪂 Open XC Analytics
+
+**[🇫🇷 Version française](README-FR.md)**
+
+---
 
 **Your paragliding flights deserve better than a squiggly line on a map.**
 
@@ -21,15 +25,15 @@ Drop an IGC file. Get obsessed with your data.
 
 ## What Is This Thing?
 
-A fully client-side web app that tears apart your IGC flight traces and tells you everything you were too busy flying to notice. No server. No account. No telemetry. Just you and your data, in a browser.
+OXCA is a fully client-side web app that tears apart your IGC flight traces and tells you everything you were too busy flying to notice. No server. No account. No telemetry. Just you and your data, in a browser.
 
 Built for **paragliding** pilots who think about thermals in the shower.
 
 ## ⚡ Quickstart
 
 ```bash
-# Option A: Just open the file
-open xc-analyzer-bundle.html
+# Option A: Just open the single file
+open oxca-bundle.html
 
 # Option B: Serve it properly (PWA + Leaflet tiles need this)
 cd xc-analyzer && python3 -m http.server
@@ -56,7 +60,7 @@ xc-analyzer/
 ├── index.html          ← PWA shell (fullscreen, installable)
 ├── manifest.json       ← "Add to Home Screen" config
 ├── sw.js               ← Offline-first service worker
-├── icon.svg            ← Vector logo (scales to any size)
+├── icon.svg            ← Vector logo
 ├── style.css           ← Dark + Light themes via CSS vars
 │
 ├── core/               ← The brain
@@ -174,11 +178,11 @@ mcRollingWindow: 25     // minutes — XC speed lookback
 
 ## 🌗 Light Mode
 
-Yeah, we have one. Click ☀ / 🌙 in the header. Persisted to localStorage. All charts adapt via CSS variables. Your eyes are welcome.
+Click ☀ / 🌙 in the header. All charts adapt. Persisted to localStorage.
 
 ## 📱 PWA
 
-Install it on your phone. It goes fullscreen. Works offline after first load. The service worker caches everything including CDN libs. Perfect for the drive home from launch when you have no signal but desperately need to know if that last thermal was your best of the day.
+Install it on your phone. It goes fullscreen. Works offline after first load. Perfect for the drive home from launch when you have no signal but desperately need to know if that last thermal was your best of the day.
 
 ## 🛠️ Tech Stack
 
@@ -191,12 +195,7 @@ Install it on your phone. It goes fullscreen. Works offline after first load. Th
 
 ## 📄 IGC Format
 
-The app reads standard IGC files as defined by the [FAI/IGC specification](https://xp-soaring.github.io/igc_file_format/igc_format_2008.html). It parses:
-
-- **H records**: Date, pilot, glider type/ID
-- **B records**: Time, lat, lon, pressure altitude, GPS altitude, validity flag
-
-Handles midnight rollover, data gaps, and the creative interpretation of the spec that different flight recorders seem to enjoy.
+The app reads standard IGC files as defined by the [FAI/IGC specification](https://xp-soaring.github.io/igc_file_format/igc_format_2008.html). Handles midnight rollover, data gaps, and the creative interpretation of the spec that different flight recorders enjoy.
 
 ## License
 

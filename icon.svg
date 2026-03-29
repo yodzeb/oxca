@@ -1,124 +1,79 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#141824"/>
-      <stop offset="100%" stop-color="#0c0e13"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#111420"/>
+      <stop offset="100%" stop-color="#0a0c12"/>
     </linearGradient>
-    <linearGradient id="wing" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#3a7bd5"/>
-      <stop offset="50%" stop-color="#4f9cf7"/>
-      <stop offset="100%" stop-color="#3a7bd5"/>
-    </linearGradient>
-    <linearGradient id="thermal" x1="0" y1="1" x2="0" y2="0">
-      <stop offset="0%" stop-color="#f0884a" stop-opacity="0.3"/>
-      <stop offset="100%" stop-color="#f0884a" stop-opacity="0.9"/>
-    </linearGradient>
-    <linearGradient id="trace" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#5dd39e"/>
-      <stop offset="100%" stop-color="#4f9cf7"/>
-    </linearGradient>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="4" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    <filter id="softglow">
-      <feGaussianBlur stdDeviation="8" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
   </defs>
 
   <!-- Background -->
-  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+  <rect width="512" height="512" rx="108" fill="url(#bg)"/>
 
-  <!-- Subtle grid lines suggesting altitude -->
-  <g opacity="0.06" stroke="#fff" stroke-width="0.5">
-    <line x1="60" y1="160" x2="452" y2="160"/>
-    <line x1="60" y1="220" x2="452" y2="220"/>
-    <line x1="60" y1="280" x2="452" y2="280"/>
-    <line x1="60" y1="340" x2="452" y2="340"/>
-    <line x1="60" y1="400" x2="452" y2="400"/>
+  <!-- Outer circle — thin, precise, like an instrument bezel -->
+  <circle cx="256" cy="240" r="155" fill="none" stroke="#2a2f40" stroke-width="1"/>
+
+  <!-- Coordinate cross — subtle, mathematical -->
+  <line x1="100" y1="240" x2="412" y2="240" stroke="#1e2230" stroke-width="0.75"/>
+  <line x1="256" y1="84" x2="256" y2="396" stroke="#1e2230" stroke-width="0.75"/>
+
+  <!-- Polar curve — the heart of flight analysis
+       This is a stylized glider polar: speed (right) vs sink (down)
+       The curve bows down and right, classic aerodynamic shape -->
+  <path d="M 152 190 
+           C 170 195, 200 202, 230 218 
+           C 260 234, 290 260, 320 300 
+           C 340 328, 355 358, 368 385"
+        fill="none" stroke="#4f9cf7" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Best L/D tangent from origin — the optimal glide line -->
+  <line x1="256" y1="240" x2="345" y2="340" 
+        stroke="#5dd39e" stroke-width="1.5" stroke-opacity="0.5" stroke-dasharray="6 4"/>
+
+  <!-- MacCready tangent — shifted up from origin, steeper = fly faster -->
+  <line x1="256" y1="200" x2="310" y2="290" 
+        stroke="#f0884a" stroke-width="1.5" stroke-opacity="0.6" stroke-dasharray="4 3"/>
+
+  <!-- Tangent point on polar (the optimal speed point) -->
+  <circle cx="293" cy="272" r="5" fill="#f0884a" opacity="0.9"/>
+
+  <!-- Best L/D point -->
+  <circle cx="310" cy="300" r="4" fill="#5dd39e" opacity="0.7"/>
+
+  <!-- Min sink point -->
+  <circle cx="205" cy="207" r="3.5" fill="#4f9cf7" opacity="0.6"/>
+
+  <!-- Thermal spiral — a single elegant logarithmic spiral
+       Represents the climb, the waiting, the patience -->
+  <path d="M 165 260 
+           C 155 240, 160 215, 180 210 
+           C 200 205, 215 218, 210 235 
+           C 205 250, 190 255, 182 245 
+           C 175 236, 180 224, 190 222"
+        fill="none" stroke="#f0884a" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.4"/>
+
+  <!-- Flight path — a single clean arc crossing the diagram
+       The actual journey through the sky -->
+  <path d="M 115 330 C 160 280, 210 235, 256 210 C 310 182, 360 185, 400 210"
+        fill="none" stroke="#4f9cf7" stroke-width="1.2" stroke-opacity="0.25" stroke-linecap="round"/>
+
+  <!-- Scale ticks — precision instrument feel -->
+  <g stroke="#3a4055" stroke-width="1" stroke-linecap="round">
+    <!-- Horizontal (speed axis) -->
+    <line x1="296" y1="237" x2="296" y2="243"/>
+    <line x1="336" y1="237" x2="336" y2="243"/>
+    <line x1="376" y1="237" x2="376" y2="243"/>
+    <!-- Vertical (sink axis) -->
+    <line x1="253" y1="280" x2="259" y2="280"/>
+    <line x1="253" y1="320" x2="259" y2="320"/>
+    <line x1="253" y1="360" x2="259" y2="360"/>
   </g>
 
-  <!-- Thermal column (subtle rising air) -->
-  <g opacity="0.12">
-    <ellipse cx="300" cy="350" rx="65" ry="120" fill="url(#thermal)"/>
-  </g>
+  <!-- Axis labels — tiny, precise -->
+  <text x="400" y="235" font-family="sans-serif" font-size="11" fill="#3a4055" text-anchor="end">V</text>
+  <text x="260" y="96" font-family="sans-serif" font-size="11" fill="#3a4055">−Vs</text>
 
-  <!-- Thermal spiral — the circling path -->
-  <path d="M 280 380 
-    C 240 370, 230 340, 260 320 
-    C 290 300, 330 310, 330 340 
-    C 330 365, 300 375, 280 360 
-    C 260 345, 260 315, 285 300 
-    C 310 285, 340 295, 340 320 
-    C 340 340, 320 355, 300 350
-    C 280 340, 275 310, 298 295
-    C 315 280, 345 292, 342 312"
-    fill="none" stroke="url(#thermal)" stroke-width="3.5" stroke-linecap="round"
-    stroke-dasharray="4 6" opacity="0.7"/>
-
-  <!-- Flight trace — the XC path -->
-  <path d="M 80 370 
-    C 100 350, 120 310, 150 290
-    C 180 270, 200 280, 220 260
-    C 240 240, 250 250, 270 230
-    L 280 380
-    M 298 295
-    C 320 240, 340 220, 370 190
-    C 390 170, 410 180, 440 200"
-    fill="none" stroke="url(#trace)" stroke-width="3" stroke-linecap="round" 
-    opacity="0.5" filter="url(#softglow)"/>
-
-  <!-- Paraglider wing — main visual element -->
-  <path d="M 100 175 
-    C 130 105, 200 70, 256 65 
-    C 312 70, 382 105, 412 175"
-    fill="none" stroke="url(#wing)" stroke-width="8" stroke-linecap="round"
-    filter="url(#glow)"/>
-
-  <!-- Wing cells (internal structure lines) -->
-  <g stroke="#4f9cf7" stroke-width="1.2" opacity="0.3" stroke-linecap="round">
-    <line x1="150" y1="138" x2="158" y2="175"/>
-    <line x1="190" y1="112" x2="195" y2="155"/>
-    <line x1="230" y1="96" x2="232" y2="142"/>
-    <line x1="256" y1="90" x2="256" y2="138"/>
-    <line x1="282" y1="96" x2="280" y2="142"/>
-    <line x1="322" y1="112" x2="317" y2="155"/>
-    <line x1="362" y1="138" x2="354" y2="175"/>
-  </g>
-
-  <!-- Lines from wing to pilot -->
-  <g stroke="#4f9cf7" stroke-width="1" opacity="0.25">
-    <line x1="140" y1="155" x2="250" y2="235"/>
-    <line x1="200" y1="120" x2="252" y2="235"/>
-    <line x1="256" y1="90" x2="256" y2="235"/>
-    <line x1="312" y1="120" x2="260" y2="235"/>
-    <line x1="372" y1="155" x2="262" y2="235"/>
-  </g>
-
-  <!-- Pilot -->
-  <ellipse cx="256" cy="248" rx="10" ry="14" fill="#4f9cf7" opacity="0.8"/>
-
-  <!-- Variometer arrow (climbing indicator) -->
-  <g transform="translate(420, 120)" opacity="0.6">
-    <path d="M 0 30 L 0 -10 L -8 2 M 0 -10 L 8 2" 
-      stroke="#5dd39e" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  </g>
-
-  <!-- Speed indicator tick marks -->
-  <g transform="translate(82, 120)" opacity="0.4">
-    <line x1="0" y1="0" x2="12" y2="0" stroke="#f0884a" stroke-width="2" stroke-linecap="round"/>
-    <line x1="0" y1="8" x2="8" y2="8" stroke="#f0884a" stroke-width="1.5" stroke-linecap="round"/>
-    <line x1="0" y1="16" x2="12" y2="16" stroke="#f0884a" stroke-width="2" stroke-linecap="round"/>
-    <line x1="0" y1="24" x2="8" y2="24" stroke="#f0884a" stroke-width="1.5" stroke-linecap="round"/>
-  </g>
-
-  <!-- Text: XC -->
-  <text x="256" y="460" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="48" fill="#e8eaf0" letter-spacing="6" opacity="0.9">XC</text>
+  <!-- OXCA wordmark -->
+  <text x="256" y="462" text-anchor="middle" 
+        font-family="sans-serif" font-weight="300" font-size="44" 
+        fill="#e8eaf0" letter-spacing="12" opacity="0.85">OXCA</text>
 </svg>

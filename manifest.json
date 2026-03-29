@@ -1,6 +1,6 @@
 {
-  "name": "XC Flight Analyzer",
-  "short_name": "XC Analyzer",
+  "name": "Open XC Analytics",
+  "short_name": "OXCA",
   "description": "Cross-country paragliding flight analysis — IGC traces, MacCready theory, wind estimation, phase detection, and record optimization.",
   "start_url": "./index.html",
   "display": "fullscreen",

@@ -89,7 +89,9 @@ ModuleRegistry.register({
 
     // Flight trace
     const traceCoords = downsample(fixes, 2000).map(f => [f.lat, f.lon]);
-    L.polyline(traceCoords, { color: '#a0a8c0', weight: 2.5, opacity: 0.6 }).addTo(map);
+    // Flight trace — dark outline + bright magenta for contrast against green topo
+    L.polyline(traceCoords, { color: '#1a1a2e', weight: 6, opacity: 0.5 }).addTo(map); // shadow
+    L.polyline(traceCoords, { color: '#e040a0', weight: 3.5, opacity: 0.75 }).addTo(map);
 
     const allCoords = [...traceCoords];
     const addRoute = (result, color, label) => {
@@ -115,7 +117,7 @@ ModuleRegistry.register({
       const div = L.DomUtil.create('div', '');
       div.style.cssText = 'background:rgba(24,28,37,0.92);padding:8px 12px;border-radius:6px;font-size:12px;color:#e8eaf0;line-height:1.8;font-family:DM Sans;';
       div.innerHTML = `
-        <div><span style="color:#a0a8c0">━━</span> Track</div>
+        <div><span style="color:#e040a0">━━</span> Track</div>
         <div><span style="color:#4f9cf7">━━</span> Straight ${straight ? straight.distance.toFixed(1)+'km' : '—'}</div>
         <div><span style="color:#5dd39e">━━</span> Flat △ ${flatTri ? flatTri.distance.toFixed(1)+'km' : '—'}</div>
         <div><span style="color:#f0884a">━━</span> FAI △ ${faiTri ? faiTri.distance.toFixed(1)+'km' : '—'}</div>

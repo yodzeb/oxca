@@ -1,4 +1,4 @@
-const CACHE_NAME = 'xc-analyzer-v2';
+const CACHE_NAME = 'oxca-v1';
 const ASSETS = [
   './',
   './index.html',
